@@ -33,25 +33,28 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRN-my-kGx" userLabel="Question Title Label">
                                                 <rect key="frame" x="0.0" y="0.0" width="352" height="23.666666666666668"/>
-                                                <color key="tintColor" name="white"/>
+                                                <color key="backgroundColor" name="ypBackground"/>
+                                                <color key="tintColor" name="ypBackground"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
-                                                <color key="textColor" name="white"/>
+                                                <color key="textColor" name="ypWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQQ-MC-HVG" userLabel="Index Label">
                                                 <rect key="frame" x="352" y="0.0" width="36" height="23.666666666666668"/>
-                                                <color key="backgroundColor" name="black"/>
-                                                <color key="tintColor" name="black"/>
+                                                <color key="backgroundColor" name="ypBackground"/>
+                                                <color key="tintColor" name="ypBackground"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
-                                                <color key="textColor" name="white"/>
+                                                <color key="textColor" name="ypWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <color key="backgroundColor" name="ypBackground"/>
+                                        <color key="tintColor" name="ypBackground"/>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rcf-cG-5U9" userLabel="Preview Image">
                                         <rect key="frame" x="0.0" y="43.666666666666686" width="388" height="582"/>
-                                        <color key="backgroundColor" name="white"/>
+                                        <color key="backgroundColor" name="ypBackground"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Rcf-cG-5U9" secondAttribute="height" multiplier="2:3" id="Ora-fb-P06"/>
                                         </constraints>
@@ -61,13 +64,15 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bak-OJ-kcv" userLabel="Question label">
                                                 <rect key="frame" x="20" y="5" width="348" height="118"/>
-                                                <color key="backgroundColor" name="black"/>
-                                                <color key="tintColor" name="white"/>
+                                                <color key="backgroundColor" name="background"/>
+                                                <color key="tintColor" name="ypBackground"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
-                                                <color key="textColor" name="white"/>
+                                                <color key="textColor" name="ypWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <color key="backgroundColor" name="ypBackground"/>
+                                        <color key="tintColor" name="ypBackground"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="bak-OJ-kcv" secondAttribute="trailing" constant="20" id="Aby-6r-NZE"/>
                                             <constraint firstItem="bak-OJ-kcv" firstAttribute="top" secondItem="XrJ-rE-iyg" secondAttribute="top" constant="5" id="Ajv-Gt-mya"/>
@@ -75,55 +80,74 @@
                                             <constraint firstItem="bak-OJ-kcv" firstAttribute="leading" secondItem="XrJ-rE-iyg" secondAttribute="leading" constant="20" id="ytp-Jp-8BW"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mUj-xq-cpg">
+                                    <stackView opaque="NO" contentMode="center" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mUj-xq-cpg">
                                         <rect key="frame" x="0.0" y="793.66666666666663" width="388" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jHL-bN-FVS" userLabel="No button">
                                                 <rect key="frame" x="0.0" y="0.0" width="184" height="60"/>
-                                                <color key="backgroundColor" name="white"/>
+                                                <color key="backgroundColor" name="ypWhite"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
-                                                <color key="tintColor" name="black"/>
+                                                <color key="tintColor" name="ypBlack"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Нет">
-                                                    <color key="titleColor" name="black"/>
+                                                    <color key="titleColor" name="ypBlack"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="noButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dBT-dN-6xT"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15G-xc-22l" userLabel="Yes button">
                                                 <rect key="frame" x="204" y="0.0" width="184" height="60"/>
-                                                <color key="backgroundColor" name="white"/>
+                                                <color key="backgroundColor" name="ypWhite"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
-                                                <color key="tintColor" name="black"/>
+                                                <color key="tintColor" name="ypBlack"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Да">
-                                                    <color key="titleColor" name="black"/>
+                                                    <color key="titleColor" name="ypBlack"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="yesButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cia-wO-lUO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
+                                        <color key="backgroundColor" name="ypBackground"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="i2c-3g-TbG"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" name="ypBackground"/>
+                                <color key="tintColor" name="ypBackground"/>
+                                <constraints>
+                                    <constraint firstItem="bak-OJ-kcv" firstAttribute="top" secondItem="Rcf-cG-5U9" secondAttribute="bottom" constant="24.999999999999886" id="fYP-3H-1y7"/>
+                                    <constraint firstItem="bak-OJ-kcv" firstAttribute="top" secondItem="Rcf-cG-5U9" secondAttribute="bottom" constant="24.999999999999886" id="hIE-O7-EEV"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="background"/>
+                        <color key="backgroundColor" name="ypBackground"/>
+                        <color key="tintColor" name="ypBackground"/>
                         <constraints>
                             <constraint firstItem="j7E-zR-cyC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="38b-9e-f70"/>
                             <constraint firstItem="j7E-zR-cyC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="IJP-XX-lbJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="j7E-zR-cyC" secondAttribute="trailing" constant="20" id="hxA-bq-mIR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="counterLabel" destination="SQQ-MC-HVG" id="mYi-yJ-Wzo"/>
+                        <outlet property="imageView" destination="Rcf-cG-5U9" id="ZcS-Px-Krq"/>
+                        <outlet property="textLabel" destination="bak-OJ-kcv" id="V4j-hK-9s0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -132,12 +156,15 @@
     </scenes>
     <resources>
         <namedColor name="background">
-            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333730697633" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="black">
-            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="ypBackground">
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="white">
+        <namedColor name="ypBlack">
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ypWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
