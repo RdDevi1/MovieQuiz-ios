@@ -4,25 +4,20 @@ final class MovieQuizViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        show(quiz: QuizStepViewModel(image: #imageLiteral(resourceName: "The Godfather.png"),
-                                     question: "Рейтинг этого фильма больше чем 6?",
-                                     questionNumber: "1/10"))
-     
+        let firstQuestion = self.questions[self.currentQuestionIndex]
+        let viewModel = self.convert(model: firstQuestion)
+        show(quiz: viewModel)
 }
  
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
-    
+
     // функции для отображения View-модели на экране
     private func show(quiz step: QuizStepViewModel) {
-        let firstQuestion = self.questions[self.currentQuestionIndex]
-        let viewModel = self.convert(model: firstQuestion)
-        imageView.image = viewModel.image
-        textLabel.text = viewModel.question
-        counterLabel.text = viewModel.questionNumber
-    
-    }
+        imageView.image = step.image
+        textLabel.text = step.question
+        counterLabel.text = step.questionNumber
+}
 
     private func show(quiz result: QuizResultsViewModel) {
         let alert = UIAlertController(
@@ -70,7 +65,8 @@ final class MovieQuizViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.imageView.layer.borderWidth = 0 //скрыть рамку
             self.showNextQuestionOrResults()
-            
+            self.noButton.isEnabled = true
+            self.yesButton.isEnabled = true
         }
        
     }
@@ -95,7 +91,9 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
-
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var yesButton: UIButton!
+    
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         let correctCurrentAnswer: Bool = questions[currentQuestionIndex].correctAnswer
         if correctCurrentAnswer {
@@ -103,6 +101,8 @@ final class MovieQuizViewController: UIViewController {
         } else {
         showAnswerResult(isCorrect: false)
         }
+        noButton.isEnabled = false
+        yesButton.isEnabled = false
     }
 
     @IBAction private func noButtonClicked(_ sender: UIButton) {
@@ -112,6 +112,8 @@ final class MovieQuizViewController: UIViewController {
         } else {
         showAnswerResult(isCorrect: true)
     }
+        noButton.isEnabled = false
+        yesButton.isEnabled = false
 }
 
 // для состояния "Вопрос задан"
