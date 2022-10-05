@@ -46,12 +46,11 @@ final class MovieQuizViewController: UIViewController {
             image: UIImage(named: model.image) ?? UIImage(),
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1) / \(questions.count)")
-      }
+    }
    
    
     
     private func showAnswerResult(isCorrect: Bool) {
-        imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.cornerRadius = 20
         if isCorrect {
@@ -97,9 +96,9 @@ final class MovieQuizViewController: UIViewController {
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         let correctCurrentAnswer: Bool = questions[currentQuestionIndex].correctAnswer
         if correctCurrentAnswer {
-        showAnswerResult(isCorrect: true)
+            showAnswerResult(isCorrect: true)
         } else {
-        showAnswerResult(isCorrect: false)
+            showAnswerResult(isCorrect: false)
         }
         noButton.isEnabled = false
         yesButton.isEnabled = false
@@ -108,10 +107,10 @@ final class MovieQuizViewController: UIViewController {
     @IBAction private func noButtonClicked(_ sender: UIButton) {
         let correctCurrentAnswer: Bool = questions[currentQuestionIndex].correctAnswer
         if correctCurrentAnswer {
-        showAnswerResult(isCorrect: false)
+            showAnswerResult(isCorrect: false)
         } else {
-        showAnswerResult(isCorrect: true)
-    }
+            showAnswerResult(isCorrect: true)
+        }
         noButton.isEnabled = false
         yesButton.isEnabled = false
 }
