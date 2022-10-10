@@ -1,13 +1,14 @@
 import UIKit
 
-final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
+final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, AlertPresenterDelegate {
+   
     
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion? // для каждого сгенеррованного вопроса
-    
+    private var alertPresenter: AlertPresenterProtocol?
     
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
@@ -21,9 +22,21 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         super.viewDidLoad()
        
         questionFactory = QuestionFactory(delegate: self)
-        
+        alertPresenter = AlertPresenter(delegate: self)
         questionFactory?.requestNextQuestion()
 }
+    
+    // MARK: - AlertPresenterDelegate
+    
+    func didAlertShow(model: UIAlertController?) {
+        guard let model = model else {
+            return
+        }
+        
+        model.present(model, animated: true, completion: nil)
+        
+    }
+    
     
     // MARK: - QuestionFactoryDelegate
 
