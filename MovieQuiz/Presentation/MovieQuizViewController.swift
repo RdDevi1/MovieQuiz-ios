@@ -24,8 +24,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         questionFactory = QuestionFactory(delegate: self)
         alertPresenter = AlertPresenter(delegate: self)
         questionFactory?.requestNextQuestion()
+        
+        // print(NSHomeDirectory()) // адрес песочницы
 }
-    
     // MARK: - AlertPresenterDelegate
     
     func didAlertShow(model: UIAlertController?) {
@@ -33,7 +34,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             return
         }
         
-        model.present(model, animated: true, completion: nil)
+        present(model, animated: true, completion: nil)
         
     }
     
@@ -89,25 +90,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
 }
 
     private func show(quiz result: QuizResultsViewModel) {
-        let alert = UIAlertController(
-            title: result.title,
-            message: result.text,
-            preferredStyle: .alert)
+        let alertModel = AlertModel(title: result.title,
+                                    message: result.text,
+                                    buttonText: result.buttonText,
+                                    completion: nil)
         
-        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            self.currentQuestionIndex = 0
-            self.correctAnswers = 0
-            
-            // заново показываем первый вопрос
-            self.questionFactory?.requestNextQuestion()
-        }
-        
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
+        alertPresenter?.showAlert(model: alertModel)
+        self.currentQuestionIndex = 0
+        self.correctAnswers = 0
+        // заново показываем первый вопрос
+        self.questionFactory?.requestNextQuestion()
     }
-    
     // для конвертации из структуры мок-данных в QuizStepViewModel
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(

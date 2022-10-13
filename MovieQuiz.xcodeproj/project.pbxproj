@@ -28,6 +28,7 @@
 		C4C1985C28F1E81100AC579E /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1985B28F1E81100AC579E /* AlertModel.swift */; };
 		C4C1985E28F2D01700AC579E /* AlertPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1985D28F2D01700AC579E /* AlertPresenterProtocol.swift */; };
 		C4C1986028F3078400AC579E /* AlertPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1985F28F3078400AC579E /* AlertPresenterDelegate.swift */; };
+		C4CD23BE28F83B1600E18AE2 /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD23BD28F83B1600E18AE2 /* StatisticService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		C4C1985F28F3078400AC579E /* AlertPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenterDelegate.swift; sourceTree = "<group>"; };
 		C4C4279928D8BAFD007113DF /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		C4C4279A28D8BAFD007113DF /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
+		C4CD23BD28F83B1600E18AE2 /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				C4C1985628F052DB00AC579E /* QuestionFactoryDelegate.swift */,
 				C4C1985D28F2D01700AC579E /* AlertPresenterProtocol.swift */,
 				C4C1985F28F3078400AC579E /* AlertPresenterDelegate.swift */,
+				C4CD23BD28F83B1600E18AE2 /* StatisticService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				AD1ABAB22831907B00B3E448 /* AppDelegate.swift in Sources */,
 				C4C1985128EF863E00AC579E /* QuizResultsViewModel.swift in Sources */,
 				AD1ABAB42831907B00B3E448 /* SceneDelegate.swift in Sources */,
+				C4CD23BE28F83B1600E18AE2 /* StatisticService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
