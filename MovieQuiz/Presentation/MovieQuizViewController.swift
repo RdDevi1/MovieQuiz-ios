@@ -178,9 +178,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         
         let errorModel = AlertModel(title: "Ошибка",
                                     message: message,
-                                    buttonText: "Попробовать ещё раз") { [weak self] in
+                                    buttonText: "Попробовать ещё раз") { [weak self]  in
             guard let self = self else { return }
-            self.present(self, animated: true, completion: nil)
+            self.questionFactory?.loadData()
+            self.showLoadingIndicator()
         }
         alertPresenter?.showAlert(model: errorModel)
     }

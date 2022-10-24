@@ -74,19 +74,20 @@ class QuestionFactory: QuestionFactoryProtocol {
             
             let rating = Float(movies.rating) ?? 0
             
-           
-            let questionsArray = [
-                "Рейтинг этого фильма больше чем 8,5?",
-                "Рейтинг этого фильма меньше чем 8,5?"]
+            let answerMore = "Рейтинг этого фильма больше чем 8,5?"
+            let answerLess = "Рейтинг этого фильма меньше чем 8,5?"
             
-            let text = questionsArray.randomElement()!
+            let questionsArray = [answerMore, answerLess]
+            
+            let text = questionsArray.randomElement()
+            guard let text = text else { return }
             
             var correctAnswer: Bool {
-                if rating > 8.5 && text == "Рейтинг этого фильма больше чем 8,5?" {
+                if rating > 8.5 && text == answerMore {
                     return true
-                } else if rating < 8.5 && text == "Рейтинг этого фильма больше чем 8,5?" {
+                } else if rating < 8.5 && text == answerMore {
                     return false
-                } else if rating > 8.5 && text == "Рейтинг этого фильма меньше чем 8,5?" {
+                } else if rating > 8.5 && text == answerLess {
                     return false
                 } else {
                     return true
@@ -99,10 +100,6 @@ class QuestionFactory: QuestionFactoryProtocol {
                 guard let self = self else { return }
                 self.delegate?.didReceiveNextQuestion(question: question)
             }
-            
-            //        let index = (0..<questions.count).randomElement() ?? 0
-            //        let question = questions[safe: index]
-            //        delegate?.didRecieveNextQuestion(question: question)
         }
     }
     
