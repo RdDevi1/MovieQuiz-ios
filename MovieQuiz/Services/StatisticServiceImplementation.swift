@@ -38,7 +38,6 @@ final class StatisticServiceImplementation: StatisticService {
                   let record = try? JSONDecoder().decode(GameRecord.self, from: data) else {
                       return .init(correct: 0, total: 0, date: Date())
                   }
-            
             return record
         }
         
@@ -47,7 +46,6 @@ final class StatisticServiceImplementation: StatisticService {
                 print("Невозможно сохранить результат")
                 return
             }
-            
             userDefaults.set(data, forKey: Keys.bestGame.rawValue)
         }
     }
@@ -80,5 +78,4 @@ final class StatisticServiceImplementation: StatisticService {
             bestGame = newResult
         }
     }
-    
 }
