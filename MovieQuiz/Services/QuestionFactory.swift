@@ -74,9 +74,24 @@ class QuestionFactory: QuestionFactoryProtocol {
             
             let rating = Float(movies.rating) ?? 0
             
-            let text = "Рейтинг этого фильма больше чем 8,5?"
+           
+            let questionsArray = [
+                "Рейтинг этого фильма больше чем 8,5?",
+                "Рейтинг этого фильма меньше чем 8,5?"]
             
-            let correctAnswer = rating > 8.5
+            let text = questionsArray.randomElement()!
+            
+            var correctAnswer: Bool {
+                if rating > 8.5 && text == "Рейтинг этого фильма больше чем 8,5?" {
+                    return true
+                } else if rating < 8.5 && text == "Рейтинг этого фильма больше чем 8,5?" {
+                    return false
+                } else if rating > 8.5 && text == "Рейтинг этого фильма меньше чем 8,5?" {
+                    return false
+                } else {
+                    return true
+                }
+            }
             
             let question = QuizQuestion(image: imageData, text: text, correctAnswer: correctAnswer)
             
