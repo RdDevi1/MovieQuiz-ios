@@ -32,9 +32,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     // MARK: - AlertPresenterDelegate
     
     func didAlertShow(model: UIAlertController?) {
-        guard let model = model else {
-            return
-        }
+        guard let model = model else { return }
         present(model, animated: true, completion: nil)
     }
     
@@ -101,14 +99,15 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private func show(quiz result: QuizResultsViewModel) {
         let alertModel = AlertModel(title: result.title,
                                     message: result.text,
-                                    buttonText: result.buttonText,
-                                    completion: nil)
-        
+                                    buttonText: result.buttonText) { [weak self] in
+            guard let self = self else { return }
+            
+            self.currentQuestionIndex = 0
+            self.correctAnswers = 0
+            // заново показываем первый вопрос
+            self.questionFactory?.requestNextQuestion()
+        }
         alertPresenter?.showAlert(model: alertModel)
-        self.currentQuestionIndex = 0
-        self.correctAnswers = 0
-        // заново показываем первый вопрос
-        self.questionFactory?.requestNextQuestion()
     }
     // для конвертации из структуры мок-данных в QuizStepViewModel
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
@@ -178,10 +177,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         
         let errorModel = AlertModel(title: "Ошибка",
                                     message: message,
-                                    buttonText: "Попробовать ещё раз") { [weak self]  in
+                                    buttonText: "Попробовать ещё раз") { [weak self] in
             guard let self = self else { return }
-            self.questionFactory?.loadData()
             self.showLoadingIndicator()
+            self.questionFactory?.loadData()
         }
         alertPresenter?.showAlert(model: errorModel)
     }
