@@ -23,7 +23,6 @@ class  AlertPresenter: AlertPresenterProtocol {
         }
         
         alert.addAction(action)
-        
         delegate?.didAlertShow(model: alert)
     }
     
