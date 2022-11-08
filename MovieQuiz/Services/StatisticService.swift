@@ -23,5 +23,3 @@ struct GameRecord: Codable, Comparable {
         return "\(correct)/\(total) (\(date.dateTimeString))"
     }
 }
-
-

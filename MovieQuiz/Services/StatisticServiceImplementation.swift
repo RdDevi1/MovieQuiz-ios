@@ -13,7 +13,6 @@ final class StatisticServiceImplementation: StatisticService {
         case correct, total, bestGame, gamesCount
     }
     
-    
     // MARK: - Body
     
     var totalAccuracy: Double {

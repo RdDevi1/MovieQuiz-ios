@@ -16,7 +16,8 @@ class  AlertPresenter: AlertPresenterProtocol {
             title: model.title,
             message: model.message,
             preferredStyle: .alert)
-        
+        alert.view.accessibilityIdentifier = "Alert"
+       // alert.view.accessibilityValue = ""
         let action = UIAlertAction(title: model.buttonText, style: .default) { _ in
             model.completion()
         }
