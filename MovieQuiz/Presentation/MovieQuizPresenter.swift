@@ -9,34 +9,25 @@ final class MovieQuizPresenter {
     weak var viewController: MovieQuizViewController?
     let questionsAmount: Int = 10
     
+    var correctAnswers: Int = 0
+    var questionFactory: QuestionFactoryProtocol?
+    var statisticService: StatisticService = StatisticServiceImplementation()
     
-    func yesButtonClicked(_ sender: UIButton) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
+    
+    func yesButtonClicked() {
+        didAnswer(isYes: true)
+    }
+    
+    func noButtonClicked() {
+        didAnswer(isYes: false)
+    }
+    
+    private func didAnswer(isYes: Bool) {
+        guard let currentQuestion = currentQuestion else { return }
         
-        let correctCurrentAnswer: Bool = currentQuestion.correctAnswer
-        if correctCurrentAnswer {
-            viewController?.showAnswerResult(isCorrect: true)
-        } else {
-            viewController?.showAnswerResult(isCorrect: false)
-        }
+        let givenAnswer = isYes
+        viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
-    
-    func noButtonClicked(_ sender: UIButton) {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        let correctCurrentAnswer: Bool = currentQuestion.correctAnswer
-        if correctCurrentAnswer {
-            viewController?.showAnswerResult(isCorrect: false)
-        } else {
-            viewController?.showAnswerResult(isCorrect: true)
-        }
-    }
-    
-    
-    
     
     func isLastQuestion() -> Bool {
         currentQuestionIndex == questionsAmount - 1
@@ -58,4 +49,38 @@ final class MovieQuizPresenter {
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
     }
     
+    func didRecieveNextQuestion(question: QuizQuestion?) {
+            guard let question = question else {
+                return
+            }
+            
+            currentQuestion = question
+            let viewModel = convert(model: question)
+            DispatchQueue.main.async { [weak self] in
+                self?.viewController?.show(quiz: viewModel)
+            }
+        }
+    
+    func showNextQuestionOrResults() {
+        
+        if isLastQuestion() {
+            statisticService.store(correct: correctAnswers, total: questionsAmount)
+            
+            let text = """
+Ваш результат: \(correctAnswers)/\(questionsAmount)
+количество сыгранных квизов: \(statisticService.gamesCount)
+Рекорд: \(statisticService.bestGame.correct)/\(questionsAmount) (\(statisticService.bestGame.date.dateTimeString))
+Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
+"""
+            
+            let viewModel = QuizResultsViewModel(
+                title: "Этот раунд окончен!",
+                text: text,
+                buttonText: "Сыграть ещё раз")
+            viewController?.show(quiz: viewModel)
+        } else {
+            self.switchToNextQuestion()
+            questionFactory?.requestNextQuestion()
+        }
+    }
 }
