@@ -46,12 +46,11 @@ class MoviesLoaderTests: XCTestCase {
             
             // Then
             switch result {
-                
             case .success(_): // не ожидаем что тест успешен - проваливаем тест
                 XCTFail("Unexpected failure")
                 
             case .failure(let error): // ожадаем ошибку - проверяем, что она дуйствительно есть
-                XCTAssertNil(error)
+                XCTAssertNotNil(error)
                 expectation.fulfill()
             }
         }

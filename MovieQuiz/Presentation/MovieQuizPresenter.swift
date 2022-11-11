@@ -7,14 +7,14 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     private let questionsAmount: Int = 10
     private var correctAnswers: Int = 0
     
-    private weak var viewController: MovieQuizViewController?
+    private weak var viewController: MovieQuizViewControllerProtocol?
     
     private var questionFactory: QuestionFactoryProtocol?
     private let statisticService: StatisticService!
     private var currentQuestion: QuizQuestion?
     
     
-    init(viewController: MovieQuizViewController) {
+    init(viewController: MovieQuizViewControllerProtocol) {
         self.viewController = viewController
         
         statisticService = StatisticServiceImplementation()
@@ -66,7 +66,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         return resultMessage
     }
     
-  private func proceedWithAnswer(isCorrect: Bool) {
+    private func proceedWithAnswer(isCorrect: Bool) {
         didAnswer(isCorrect: isCorrect)
         
         viewController?.highlightImageBorder(isCorrectAnswer: isCorrect)
