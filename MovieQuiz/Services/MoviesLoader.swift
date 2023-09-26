@@ -1,10 +1,6 @@
 
 import Foundation
 
-protocol MoviesLoading {
-    func loadMovies (handler: @escaping (Result<MostPopularMovies, Error>) -> Void)
-}
-
 struct MoviesLoader: MoviesLoading {
     // MARK: - NetworkClient
     private let networkClient: NetworkRouting
@@ -12,8 +8,8 @@ struct MoviesLoader: MoviesLoading {
     init(networkClient: NetworkRouting = NetworkClient()) {
         self.networkClient = networkClient
     }
-    // MARK: - URL
     
+    // MARK: - URL
     private var mostPopularMoviesURL: URL {
         guard let url = URL(string: "https://imdb-api.com/en/API/Top250Movies/k_l22vzikh") else {
             preconditionFailure("Unable to construct mostPopularMoviesUrl")
@@ -33,9 +29,7 @@ struct MoviesLoader: MoviesLoading {
                 handler(.failure(error))
                 
             case .success(let data):
-                
                 let jsonMovies = try? JSONDecoder().decode(MostPopularMovies.self, from: data)
-                
                 if let jsonMovies = jsonMovies {
                     handler(.success(jsonMovies))
                 } else {
@@ -44,5 +38,6 @@ struct MoviesLoader: MoviesLoading {
             }
         }
     }
+    
 }
 

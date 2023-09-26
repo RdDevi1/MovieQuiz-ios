@@ -49,7 +49,7 @@ class MoviesLoaderTests: XCTestCase {
             case .success(_): // не ожидаем что тест успешен - проваливаем тест
                 XCTFail("Unexpected failure")
                 
-            case .failure(let error): // ожадаем ошибку - проверяем, что она дуйствительно есть
+            case .failure(let error): // ожадаем ошибку - проверяем, что она действительно есть
                 XCTAssertNotNil(error)
                 expectation.fulfill()
             }
@@ -57,11 +57,7 @@ class MoviesLoaderTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
-    
-    
-    
     // MARK: - STUBS
-    
     struct StubNetworkClient: NetworkRouting {
         
         enum TestError: Error {

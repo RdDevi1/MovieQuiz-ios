@@ -1,8 +1,8 @@
 import UIKit
-import Foundation
 
 final class MovieQuizPresenter: QuestionFactoryDelegate {
     
+    // MARK: - Properties
     private var currentQuestionIndex: Int = 0
     private let questionsAmount: Int = 10
     private var correctAnswers: Int = 0
@@ -10,10 +10,10 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     private weak var viewController: MovieQuizViewControllerProtocol?
     
     private var questionFactory: QuestionFactoryProtocol?
-    private let statisticService: StatisticService!
+    private let statisticService: StatisticServiceProtocol!
     private var currentQuestion: QuizQuestion?
     
-    
+    // MARK: - Lifecycle
     init(viewController: MovieQuizViewControllerProtocol) {
         self.viewController = viewController
         
@@ -23,6 +23,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         viewController.showLoadingIndicator()
     }
     
+    // MARK: - Methods
     private func didAnswer(isYes: Bool) {
         guard let currentQuestion = currentQuestion else { return }
         
@@ -40,7 +41,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
                 title: "Этот раунд окончен!",
                 text: text,
                 buttonText: "Сыграть ещё раз")
-            viewController?.show(quiz: viewModel)
+            viewController?.showQuizResult(quiz: viewModel)
         } else {
             self.switchToNextQuestion()
             questionFactory?.requestNextQuestion()
@@ -72,13 +73,12 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         viewController?.highlightImageBorder(isCorrectAnswer: isCorrect)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
-            
+            guard let self else { return }
             self.proceedToNextQuestionOrResults()
         }
     }
-    // MARK: - QuestionFactoryDelegate
     
+    // MARK: - QuestionFactoryDelegate
     func didReceiveNextQuestion(question: QuizQuestion?) {
         guard let question = question else {
             return
@@ -87,7 +87,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         currentQuestion = question
         let viewModel = convert(model: currentQuestion!)
         DispatchQueue.main.async { [weak self] in
-            self?.viewController?.show(quiz: viewModel)
+            self?.viewController?.showQuizStep(quiz: viewModel)
         }
         
     }
@@ -130,7 +130,6 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         currentQuestionIndex += 1
     }
     
-    // для конвертации из структуры мок-данных в QuizStepViewModel
     func convert(model: QuizQuestion) -> QuizStepViewModel {
         QuizStepViewModel(
             image: UIImage(data: model.image) ?? UIImage(),
@@ -144,7 +143,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         currentQuestion = question
         let viewModel = convert(model: question)
         DispatchQueue.main.async { [weak self] in
-            self?.viewController?.show(quiz: viewModel)
+            self?.viewController?.showQuizStep(quiz: viewModel)
         }
     }
     

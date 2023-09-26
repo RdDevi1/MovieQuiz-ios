@@ -1,70 +1,27 @@
-
 import Foundation
 
 class QuestionFactory: QuestionFactoryProtocol {
     
+    // MARK: - Properties
     var delegate: QuestionFactoryDelegate?
-    
     private let moviesLoader: MoviesLoader
-    
     private var movies: [MostPopularMovie] = []
     
-    //    private let questions: [QuizQuestion] = [
-    //            QuizQuestion(
-    //                image: "The Godfather",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: true),
-    //            QuizQuestion(
-    //                image: "The Dark Knight",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: true),
-    //            QuizQuestion(
-    //                image: "Kill Bill",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: true),
-    //            QuizQuestion(
-    //                image: "The Avengers",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: true),
-    //            QuizQuestion(
-    //                image: "Deadpool",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: true),
-    //            QuizQuestion(
-    //                image: "The Green Knight",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: true),
-    //            QuizQuestion(
-    //                image: "Old",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: false),
-    //            QuizQuestion(
-    //                image: "The Ice Age Adventures of Buck Wild",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: false),
-    //            QuizQuestion(
-    //                image: "Tesla",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: false),
-    //            QuizQuestion(
-    //                image: "Vivarium",
-    //                text: "Рейтинг этого фильма больше чем 6?",
-    //                correctAnswer: false)
-    //        ]
-    
+    // MARK: - Lifecycle
     init(delegate: QuestionFactoryDelegate, moviesLoader: MoviesLoader) {
         self.delegate = delegate
         self.moviesLoader = moviesLoader
     }
     
+    // MARK: - Methods
     func requestNextQuestion() {
         DispatchQueue.global().async { [weak self] in  //запускаем работу с изображениями и сетью в другом потоке
-            guard let self = self else { return }  //выбираем произвольный элемент из массива, чтобы показать его
+            guard let self else { return }
             let index = (0..<self.movies.count).randomElement() ?? 0
             
             guard let movies = self.movies[safe: index] else { return }
             
-            var imageData = Data()  //создание данных для картинки из URL и обработка ошибки
+            var imageData = Data()
             
             do {
                 imageData = try Data(contentsOf: movies.resizedImageURL)
@@ -97,7 +54,7 @@ class QuestionFactory: QuestionFactoryProtocol {
             let question = QuizQuestion(image: imageData, text: text, correctAnswer: correctAnswer)
             
             DispatchQueue.main.async { [weak self] in   //возвращение в главные поток после загрузки данных
-                guard let self = self else { return }
+                guard let self else { return }
                 self.delegate?.didReceiveNextQuestion(question: question)
             }
         }
@@ -105,20 +62,19 @@ class QuestionFactory: QuestionFactoryProtocol {
     
     func loadData() {
         moviesLoader.loadMovies { result in
-            
             DispatchQueue.main.async { [weak self] in   //возвращение в главные поток после загрузки данных
                 guard let self = self else { return }
                 
                 switch result {
-                    
-                case .success(let mostPopularMovies):
+                   case .success(let mostPopularMovies):
                     self.movies = mostPopularMovies.items  // сохраняем фильм в нашу новую переменную
                     self.delegate?.didLoadDataFromServer() // сообщаем, что данные загрузились
                     
-                case .failure(let error):
-                    self.delegate?.didFailToLoadData(with: error) // сообщаем об ошибке нашему MovieQuizViewController
+                   case .failure(let error):
+                    self.delegate?.didFailToLoadData(with: error) // сообщаем MovieQuizViewController об ошибке
                 }
             }
         }
     }
+    
 }

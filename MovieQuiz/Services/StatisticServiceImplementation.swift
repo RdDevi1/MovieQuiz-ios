@@ -1,10 +1,7 @@
 
 import Foundation
 
-
-final class StatisticServiceImplementation: StatisticService {
-    
-    // MARK: - For help
+final class StatisticServiceImplementation: StatisticServiceProtocol {
     
     private let userDefaults = UserDefaults.standard
     
@@ -14,7 +11,6 @@ final class StatisticServiceImplementation: StatisticService {
     }
     
     // MARK: - Body
-    
     var totalAccuracy: Double {
         get {
             return (Double(correct) / Double(total)) * 100
@@ -35,8 +31,8 @@ final class StatisticServiceImplementation: StatisticService {
         get {
             guard let data = userDefaults.data(forKey: Keys.bestGame.rawValue),
                   let record = try? JSONDecoder().decode(GameRecord.self, from: data) else {
-                      return .init(correct: 0, total: 0, date: Date())
-                  }
+                return .init(correct: 0, total: 0, date: Date())
+            }
             return record
         }
         

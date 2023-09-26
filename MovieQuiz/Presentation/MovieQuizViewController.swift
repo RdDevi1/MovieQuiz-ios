@@ -2,6 +2,7 @@ import UIKit
 
 final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, MovieQuizViewControllerProtocol {
     
+    // MARK: - UI
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet private var textLabel: UILabel!
     @IBOutlet private var counterLabel: UILabel!
@@ -9,13 +10,12 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
     @IBOutlet private var yesButton: UIButton!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     
-    
+    // MARK: - Properties
     private var alertPresenter: AlertPresenterProtocol?
-    private var statisticService: StatisticService = StatisticServiceImplementation()
+    private var statisticService: StatisticServiceProtocol = StatisticServiceImplementation()
     private var presenter: MovieQuizPresenter!
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = MovieQuizPresenter(viewController: self)
@@ -24,17 +24,15 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
         
         imageView.layer.masksToBounds = true
         showLoadingIndicator()
-        
     }
-    // MARK: - AlertPresenterDelegate
     
+    // MARK: - AlertPresenterDelegate
     func didAlertShow(model: UIAlertController?) {
         guard let model = model else { return }
         present(model, animated: true, completion: nil)
     }
     
-    // MARK: - buttons's Actions
-    
+    // MARK: - Actions
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         presenter.yesButtonClicked()
         
@@ -49,9 +47,8 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
         yesButton.isEnabled = false
     }
     
-    
-    // функции для отображения View-модели на экране
-    func show(quiz step: QuizStepViewModel) {
+    // MARK: - Methods
+    func showQuizStep(quiz step: QuizStepViewModel) {
         imageView.layer.borderColor = UIColor.clear.cgColor
         noButton.isEnabled = true
         yesButton.isEnabled = true
@@ -61,7 +58,7 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
         counterLabel.text = step.questionNumber
     }
     
-    func show(quiz result: QuizResultsViewModel) {
+    func showQuizResult(quiz result: QuizResultsViewModel) {
         let message = presenter.makeResultMessage()
         
         let alertModel = AlertModel(title: result.title,

@@ -1,5 +1,4 @@
 
-import Foundation
 import UIKit
 
 // модель "Вопрос задан" для отображения на экране
